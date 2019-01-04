@@ -29,7 +29,9 @@ export class ReadQrCodePage {
     console.log('ionViewDidLoad ReadQrCodePage');
   }
   readQrCodeByImage(){
-    this.qrCodeService.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+    this.qrCodeService.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY).then((decode)=>{
+      this.decodeQrCode = decode;
+    });
   }
   readQrCodeByCamera(){
     this.barcodeScanner.scan().then(barcodeData => {

@@ -66,7 +66,7 @@ export class QrCodeProvider {
     };
     return qrcodeObject;
   }
-  public takePicture(sourceType) {
+  async takePicture(sourceType) {
     // Create options for the Camera Dialog
     var options = {
       quality: 100,
@@ -78,12 +78,37 @@ export class QrCodeProvider {
       DestinationType: this.camera.DestinationType.DATA_URL
     };
 
-    this.camera.getPicture(options).then((imagePath) => {
-      if(sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
-            console.log();
+     const base64 = await this.camera.getPicture(options);
+
+      let image = await this.decodeQrCode('data:image/base64'+base64);
+      let decode = jsQR(image.data, image.width,image.height);
+
+      return decode;
+      //
+  }
+  decodeQrCode(imageimgReference): Promise<ImageData>{
+    return new Promise((resolve, reject) =>{
+      let image = new Image();
+      image.src = imageimgReference;
+      let  canvas    = document.createElement("canvas"),
+          context   = canvas.getContext("2d");
+
+      image.onload = () =>{
+        try {
+          canvas.width  = image.width;
+          canvas.height = image.height;
+          context.drawImage(image, 0, 0);
+        }catch (e) {
+          console.log(e);
+        }
+        const data =  context.getImageData(0,0,canvas.width,canvas.height);
+        resolve(data);
       }
     })
+
+
   }
+
 
 
 }
