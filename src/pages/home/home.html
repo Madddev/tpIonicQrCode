@@ -11,7 +11,7 @@
   <h3>all QRcode generate</h3>
   <ion-list>
     <button ion-item *ngFor="let qrcode of qrcodes">
-      {{ qrcode.title }} | {{qrcode.date}}
+      {{ qrcode.title }} {{qrcode.date | date: 'dd/MM/yyyy'}}
     </button>
   </ion-list>
   <br>

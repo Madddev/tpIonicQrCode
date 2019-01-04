@@ -82,10 +82,8 @@ export class QrCodeProvider {
 
      const base64 = await this.camera.getPicture(options);
 
-      let image = await this.decodeQrCode('data:image/base64'+base64);
-      let Qrcoding = jsQR(image.data, image.width,image.height);
-
-      return Qrcoding;
+      let image = await this.decodeQrCode('data:image/jpeg;base64,'+base64);
+      return jsQR(image.data, image.width,image.height);
       //
   }
   decodeQrCode(imageimgReference): Promise<ImageData>{
