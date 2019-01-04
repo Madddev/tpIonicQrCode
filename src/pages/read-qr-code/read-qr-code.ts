@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import {Camera} from '@ionic-native/camera';
 import {QrCodeProvider} from "../../providers/qr-code/qr-code";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
@@ -27,10 +27,8 @@ export class ReadQrCodePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ReadQrCodePage');
   }
-  readQrCodeByImage(){
-    this.qrCodeService.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY).then((decode)=>{
-      this.decodeQrCode = decode;
-    });
+  async readQrCodeByImage(){
+    this.decodeQrCode = await this.qrCodeService.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
   }
   readQrCodeByCamera(){
     this.barcodeScanner.scan().then(barcodeData => {

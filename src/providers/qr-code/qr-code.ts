@@ -5,7 +5,7 @@ import QRCode from 'qrcode'
 import {QrCode} from "../../interface/QrCode";
 import {Transfer} from "@ionic-native/transfer";
 import {FilePath} from "@ionic-native/file-path";
-import {Camera, DestinationType, EncodingType} from '@ionic-native/camera';
+import {Camera} from '@ionic-native/camera';
 import { Platform } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 
@@ -73,8 +73,6 @@ export class QrCodeProvider {
     var options = {
       quality: 100,
       sourceType: sourceType,
-      saveToPhotoAlbum: false,
-      correctOrientation: true,
       mediaType: this.camera.MediaType.PICTURE,
       EncodingType: this.camera.EncodingType.JPEG,
       DestinationType: this.camera.DestinationType.DATA_URL
@@ -82,37 +80,42 @@ export class QrCodeProvider {
 
      const base64 = await this.camera.getPicture(options);
 
-      let image = await this.decodeQrCode('data:image/jpeg;base64,'+base64);
-      const qrcode = jsQR(image.data, image.width,image.height);
+      let image = await this.decodeQrCode('data:image/jpeg;base64,'+ base64);
+      const qrcoding = jsQR(image.data, image.width,image.height);
 
-      if (qrcode && qrcode.data !== undefined) {
-      return qrcode.data;
+      if (qrcoding && qrcoding.data !== undefined) {
+      return qrcoding.data;
     }
       //
   }
-  decodeQrCode(imageimgReference): Promise<ImageData>{
-    return new Promise((resolve, reject) =>{
-      let image = new Image();
-      image.src = imageimgReference;
-      let  canvas    = document.createElement("canvas"),
-          context   = canvas.getContext("2d");
 
-      image.onload = () =>{
+  decodeQrCode(url): Promise<ImageData> {
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.src = url;
+
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+
+      image.onload = () => {
         try {
-          canvas.width  = image.width;
+          canvas.width = image.width;
           canvas.height = image.height;
           context.drawImage(image, 0, 0);
-        }catch (e) {
-          console.log(e);
+        } catch (e) {
+          reject(e);
         }
-        const data =  context.getImageData(0,0,canvas.width,canvas.height);
-        resolve(data);
-      }
-    })
 
+        const data = context.getImageData(0, 0, canvas.width, canvas.height);
 
+        return resolve(data);
+      };
+
+      image.onerror = (error: ErrorEvent) => {
+        return reject(error);
+      };
+    });
   }
-
 
 
 }
