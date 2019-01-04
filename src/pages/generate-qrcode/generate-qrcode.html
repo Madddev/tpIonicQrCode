@@ -1,0 +1,34 @@
+<!--
+  Generated template for the GenerateQrcodePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>generateQrcode</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="text" (ngSubmit)="generateQrcode()">
+    <ion-item>
+      <ion-label>Text</ion-label>
+      <ion-input type="text" placeholder="write simple text" formControlName="title"></ion-input>
+    </ion-item>
+    <br>
+    <div style="text-align: center">
+      <button ion-button type="submit" [disabled]="!text.valid">Generate</button>
+    </div>
+    <div *ngIf="urlQrcode" style="text-align: center">
+      <img text-center width="300" height="300" [src]="urlQrcode"/>
+        <button ion-button type="submit">Share</button>
+    </div>
+  </form>
+
+</ion-content>

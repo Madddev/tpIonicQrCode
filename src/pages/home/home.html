@@ -8,11 +8,13 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  <h3>all QRcode generate</h3>
+  <ion-list>
+    <button ion-item *ngFor="let qrcode of qrcodes">
+      {{ qrcode.title }} | {{qrcode.date}}
+    </button>
+  </ion-list>
+  <br>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <button ion-button secondary menuToggle>Add QrCode</button>
 </ion-content>

@@ -10,23 +10,34 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { QrCodeProvider } from '../providers/qr-code/qr-code';
 import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
+import { ImportQrcodePage } from '../pages/import-qrcode/import-qrcode';
+import { GenerateQrcodePage } from '../pages/generate-qrcode/generate-qrcode';
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+      GenerateQrcodePage,
+      ImportQrcodePage
+
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    GenerateQrcodePage,
+    ImportQrcodePage
   ],
   providers: [
     StatusBar,
