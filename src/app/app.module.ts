@@ -9,10 +9,19 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { QrCodeProvider } from '../providers/qr-code/qr-code';
+import { SocialSharing } from '@ionic-native/social-sharing';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { ImportQrcodePage } from '../pages/import-qrcode/import-qrcode';
 import { GenerateQrcodePage } from '../pages/generate-qrcode/generate-qrcode';
+import { ReadQrCodePage } from '../pages/read-qr-code/read-qr-code';
+
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
+import { Camera } from '@ionic-native/camera';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 
 
 @NgModule({
@@ -21,7 +30,8 @@ import { GenerateQrcodePage } from '../pages/generate-qrcode/generate-qrcode';
     HomePage,
     ListPage,
       GenerateQrcodePage,
-      ImportQrcodePage
+      ImportQrcodePage,
+      ReadQrCodePage
 
   ],
   imports: [
@@ -37,13 +47,20 @@ import { GenerateQrcodePage } from '../pages/generate-qrcode/generate-qrcode';
     HomePage,
     ListPage,
     GenerateQrcodePage,
-    ImportQrcodePage
+    ImportQrcodePage,
+      ReadQrCodePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    QrCodeProvider
+    QrCodeProvider,
+      SocialSharing,
+    File,
+    Transfer,
+    Camera,
+    FilePath,
+    BarcodeScanner
   ]
 })
 export class AppModule {}

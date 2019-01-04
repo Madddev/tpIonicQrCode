@@ -3,6 +3,11 @@ import { Injectable } from '@angular/core';
 import { Storage } from "@ionic/storage";
 import QRCode from 'qrcode'
 import {QrCode} from "../../interface/QrCode";
+import {Transfer} from "@ionic-native/transfer";
+import {FilePath} from "@ionic-native/file-path";
+import {Camera, DestinationType, EncodingType} from '@ionic-native/camera';
+import { Platform } from 'ionic-angular';
+import jsQR from "jsqr";
 
 const qrcode_KEY = "qrcode_";
 
@@ -12,7 +17,15 @@ const qrcode_KEY = "qrcode_";
 @Injectable()
 export class QrCodeProvider {
 
-  constructor(public http: HttpClient, private storage : Storage) {
+  constructor(
+      public http: HttpClient,
+      private storage : Storage,
+      private transfer: Transfer,
+      private file: File,
+      private filePath: FilePath,
+      public platform: Platform,
+      private camera: Camera,
+  ) {
   }
 
   async  generateQrcode(text: string): Promise<string> {
@@ -53,5 +66,24 @@ export class QrCodeProvider {
     };
     return qrcodeObject;
   }
+  public takePicture(sourceType) {
+    // Create options for the Camera Dialog
+    var options = {
+      quality: 100,
+      sourceType: sourceType,
+      saveToPhotoAlbum: false,
+      correctOrientation: true,
+      mediaType: this.camera.MediaType.PICTURE,
+      EncodingType: this.camera.EncodingType.JPEG,
+      DestinationType: this.camera.DestinationType.DATA_URL
+    };
+
+    this.camera.getPicture(options).then((imagePath) => {
+      if(sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+            console.log();
+      }
+    })
+  }
+
 
 }

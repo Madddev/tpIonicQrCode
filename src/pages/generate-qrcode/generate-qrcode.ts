@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import {QrCodeProvider} from "../../providers/qr-code/qr-code";
+import {SocialSharing} from "@ionic-native/social-sharing";
 
 
 /**
@@ -21,7 +22,7 @@ export class GenerateQrcodePage {
   private text : FormGroup;
   private urlQrcode :any ;
 
-  constructor( private formBuilder: FormBuilder, private qrCodeService : QrCodeProvider) {
+  constructor( private formBuilder: FormBuilder, private qrCodeService : QrCodeProvider, private socialSharing : SocialSharing) {
     this.text = this.formBuilder.group({title: ['', Validators.required],
     });
   }
@@ -29,6 +30,9 @@ export class GenerateQrcodePage {
     this.qrCodeService.generateQrcode(this.text.value.title).then((url) =>
       this.urlQrcode = url
     );
+  }
+  sharingQrCode(urlQrcode) {
+    return this.socialSharing.share(null, null, urlQrcode, null);
   }
 
 }

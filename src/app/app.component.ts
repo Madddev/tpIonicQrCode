@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ImportQrcodePage } from '../pages/import-qrcode/import-qrcode';
+import { ReadQrCodePage } from '../pages/read-qr-code/read-qr-code';
 import { GenerateQrcodePage } from '../pages/generate-qrcode/generate-qrcode';
 
 @Component({
@@ -22,9 +22,9 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
+      { title: 'History', component: HomePage },
       { title: 'GenerateQrCode', component: GenerateQrcodePage },
-      { title: 'ImportQrCode', component: ImportQrcodePage }
+      { title: 'ReadQrCode', component: ReadQrCodePage }
     ];
 
   }

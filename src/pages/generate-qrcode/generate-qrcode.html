@@ -27,7 +27,7 @@
     </div>
     <div *ngIf="urlQrcode" style="text-align: center">
       <img text-center width="300" height="300" [src]="urlQrcode"/>
-        <button ion-button type="submit">Share</button>
+        <button ion-button type="submit" (click)="sharingQrCode(urlQrcode)">Share</button>
     </div>
   </form>
 
