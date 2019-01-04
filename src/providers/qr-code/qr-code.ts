@@ -7,6 +7,8 @@ import {Transfer} from "@ionic-native/transfer";
 import {FilePath} from "@ionic-native/file-path";
 import {Camera, DestinationType, EncodingType} from '@ionic-native/camera';
 import { Platform } from 'ionic-angular';
+import { File } from '@ionic-native/file';
+
 import jsQR from "jsqr";
 
 const qrcode_KEY = "qrcode_";
@@ -30,7 +32,7 @@ export class QrCodeProvider {
 
   async  generateQrcode(text: string): Promise<string> {
     try {
-      let qrcode = this.constructQrCodeObjetc(text);
+      let qrcode = this.constructQrCodeObject(text);
       this.addQrcode(qrcode);
       return await QRCode.toDataURL(text);
     } catch (err) {
@@ -59,7 +61,7 @@ export class QrCodeProvider {
             }
         );
   }
-  constructQrCodeObjetc(text) : QRCode{
+  constructQrCodeObject(text) : QRCode{
     let qrcodeObject : QrCode = {
       title : text,
       date : new Date()
@@ -81,9 +83,9 @@ export class QrCodeProvider {
      const base64 = await this.camera.getPicture(options);
 
       let image = await this.decodeQrCode('data:image/base64'+base64);
-      let decode = jsQR(image.data, image.width,image.height);
+      let Qrcoding = jsQR(image.data, image.width,image.height);
 
-      return decode;
+      return Qrcoding;
       //
   }
   decodeQrCode(imageimgReference): Promise<ImageData>{

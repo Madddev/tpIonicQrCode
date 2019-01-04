@@ -29,9 +29,9 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     MyApp,
     HomePage,
     ListPage,
-      GenerateQrcodePage,
-      ImportQrcodePage,
-      ReadQrCodePage
+    GenerateQrcodePage,
+    ImportQrcodePage,
+    ReadQrCodePage
 
   ],
   imports: [
@@ -55,7 +55,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     QrCodeProvider,
-      SocialSharing,
+    SocialSharing,
     File,
     Transfer,
     Camera,

@@ -5,7 +5,6 @@ import {QrCodeProvider} from "../../providers/qr-code/qr-code";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 
-declare var cordova: any;
 
 
 @IonicPage()
